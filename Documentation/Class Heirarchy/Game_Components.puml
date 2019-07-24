@@ -1,0 +1,137 @@
+@startuml
+class Board{
+    Properties
+    __ public __
+
+    {field} +tuple(int x, int y) offset
+    {field} +int scale
+
+    {field} +int width
+    {field} +int width_total
+
+    {field} +int height
+    {field} +int height_total
+
+    {field} +bool ready_for_piece
+
+    {field} +int level
+    {field} +int lines
+    {field} +int score
+    {field} +bool playing
+
+    {field} +float delay
+    {field} +bool ready_update
+
+    __ private __
+
+    {field} -Block[:] pieces
+    {field} -Block current_piece
+    {field} -int[:, :] grid
+
+    {field} -int time_start
+
+    __ protected __
+
+    {field} #char background_char
+    {field} #callable piece_callback
+
+    {field} #bool can_shift_right
+    {field} #bool can_shift_left
+    {field} #bool can_rotate
+    {field} #bool can_descend
+
+    ==
+    Methods
+    __ public __
+
+    {method} +reset()
+    {method} +update()
+    {method} +new_piece(int identifier)
+    {method} +place_piece()
+
+    {method} +str get_board_string()
+    {method} +str get_game_over_string()
+    {method} +add_to_screen(curses.screen screen)
+
+    {method} +bool right()
+    {method} +bool left()
+    {method} +bool rotate()
+    {method} +bool descend()
+    {method} +drop()
+    {method} +soft_drop()
+
+    __ private __
+
+    {method} -int[:, :] __get_existing_board()
+
+    {method} -bool __inside_board(int x = 0, int y = 0)
+    {method} -int __min_drop_distance()
+
+    __ protected __
+
+    {method} #lose()
+    {method} #bool update_grid()
+
+}
+
+class Player{
+    Properties
+    __ public __
+
+    {field} +int joystick
+    {field} +dict keys
+    {field} +Board board
+
+    ==
+    Methods
+    __ public __
+
+    {method} +callable get_function(KeyMappings function)
+
+}
+
+class Tetris{
+    Properties
+    __ public __
+
+    {field} +tuple(int x, int y) offset
+    {field} +int scale
+    {field} +int board_width
+    {field} +int board_width_adj
+    {field} +int board_width_total
+    {field} +int board_height
+    {field} +int board_height_total
+
+    {field} +int highscore
+    {field} +int next_piece
+    {field} +Board[:] boards
+    {field} +Player[:] players
+
+    {field} +int score_display_width
+    {field} +int score_display_height
+
+    {field} +tuple(int x, int y) display_midpoint
+
+    __ private __
+    
+    {field} -str control_string
+    {field} -int control_box_width
+    {field} -int control_box_height
+
+    ==
+    Methods
+    __ public __
+
+    {method} +reset()
+    {method} +newgame()
+
+    {method} +str get_controls_box()
+    {method} +str get_score_box()
+
+    {method} +add_to_screen(curses.screen screen)
+
+    __ private __
+
+    {method} #gen_next_piece()
+}
+@enduml

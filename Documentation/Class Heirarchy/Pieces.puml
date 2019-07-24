@@ -1,0 +1,133 @@
+@startuml
+class Block {
+    Properties
+    __ public __
+
+    {field} +tuple(x, y) offset
+    {field} +int rotation
+    {field} +int max_rotation
+    {field} +int pair_index
+    __ protected __
+    {field} #curses.COLOR color
+    {field} #bool pair_initialized
+    {field} #int num
+    {field} #char symbol
+    {field} #int[:, :] locations
+    ==
+    Methods
+
+    {method} left()
+    {method} right()
+    {method} rotate(bool clockwise = False)
+    {method} descend(int lines = 1)
+    {method} add_to_screen(curses.screen screen)
+
+    __ private __
+
+    {method} -__shift(bool left)
+
+    __ protected __
+
+    {method} #init_color_pair(int index = 1)
+    {method} #create_locations()
+
+}
+
+class TBlock{
+    color = curses.COLOR_YELLOW
+    max_rotation = 4
+    num = 0
+
+    ==
+    Methods
+
+    {method} #create_locations()
+}
+
+class OBlock{
+    color = curses.COLOR_BLUE
+    max_rotation = 1
+    num = 1
+
+    ==
+    Methods
+
+    {method} #create_locations()
+}
+
+class IBlock{
+    color = curses.COLOR_RED
+    max_rotation = 2
+    num = 2
+
+    ==
+    Methods
+
+    {method} #create_locations()
+}
+
+class IsomerBlock{
+    {field} #bool mirrored
+
+    max_rotation = 4
+}
+
+class LBlock{
+    color = curses.COLOR_WHITE
+    num = 3
+
+    ==
+    Methods
+
+    {method} #create_locations()
+}
+
+class JBlock{
+    color = curses.COLOR_MAGENTA
+    num = 4
+
+    ==
+    Methods
+
+    {method} #create_locations()
+}
+
+class ZigZagBlock{
+    {field} #bool mirrored
+
+    max_rotation = 2
+}
+
+class SBlock{
+    color = curses.COLOR_CYAN
+    num = 5
+
+    ==
+    Methods
+
+    {method} #create_locations()
+}
+
+class ZBlock{
+    color = curses.COLOR_GREEN
+    num = 6
+
+    ==
+    Methods
+
+    {method} #create_locations()
+}
+
+Block <|-- TBlock
+Block <|-- OBlock
+Block <|-- IBlock
+Block <|-- IsomerBlock
+Block <|-- ZigZagBlock
+
+IsomerBlock <|-- LBlock
+IsomerBlock <|-- JBlock
+
+ZigZagBlock <|-- SBlock
+ZigZagBlock <|-- ZBlock
+
+@enduml

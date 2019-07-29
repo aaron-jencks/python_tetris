@@ -113,7 +113,7 @@ class Tetris{
     {field} +tuple(int x, int y) display_midpoint
 
     __ private __
-    
+
     {field} -str control_string
     {field} -int control_box_width
     {field} -int control_box_height

@@ -10,6 +10,7 @@ import tetris.input.gamepad as gp
 
 
 # TODO Create start and pause menus
+# TODO Make the display controller friendly
 
 # TODO Fix control display panel
 # TODO Test the new piece_control fixes for button-repeating when a button is held
@@ -63,6 +64,10 @@ class Game(Tetris):
 
     def main_menu(self):
         """Displays the main menu for the game"""
+        menu_string = boxed_text('Tetris!\n1: Single player\n2: Two player\n3: Three player\n4: Four player')
+        x, y = self.display_midpoint
+        add_multiline_string(menu_string, self.screen, x - 9, y - 3)
+        self.screen.refresh()
         pass
 
     def pause(self):

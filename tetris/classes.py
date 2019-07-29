@@ -21,8 +21,6 @@ pgj = pygame.joystick
 class Board:
     """Contains a numpy array that holds the blocks for the game, contains methods for descent, dropping, and moving."""
 
-    global_pieces = []
-
     def __init__(self, pos_x: int, pos_y: int, piece_callback, width: int = 10, height: int = 20, scale: int = 1):
         self.offset = (pos_x, pos_y)
         self.scale = scale
